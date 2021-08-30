@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Image recognition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"></script>
+
+   <link rel="stylesheet" href="style.css">
+  
+  </head>
+
+  <body>
+  <div class="container">
+    
+    <center>
+      <h1 id="bobobobobobobo" class="btn btn-success header glyphicon glyphicon-film">Image Recognition Website!</h1>
+      <br><br>
+
+      <p style="font-size: 22px;">Model is trained to identify the following people: </p>
+      <b class="name-of-objects">
+        Okay<br><img src="data:image/jpeg;base64,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" class="iconpicky"><hr>
+        All good!<br><img src="https://th.bing.com/th/id/OIP.rwQBqv5IlKcjL8VHm8znjwHaHa?w=163&h=180&c=7&o=5&pid=1.7" class="iconpicky"><hr>
+        Peace<br><img src="https://th.bing.com/th/id/OIP.fstjE_zceOx07uoRFSNHhgHaHa?w=184&h=184&c=7&o=5&pid=1.7" class="iconpicky"
+      </b><hr>
+      <label>Webcam View - </label>
+      <div id="gorp"class="dubdub"></div>
+      <br><br>
+      <p style="font-size: 22px;">Prediction 1 :  <span id="pre1"></span></p>
+      <p style="font-size: 22px;">Prediction 2 :  <span id="pre2"></span></p>
+      <br><br>
+      <div id="thepic" class="dubdub"></div>
+      <br><br>
+      <hr>
+    </center>
+
+  </div>
+
+  
+<script src="main.js"></script>
+
+  </body>
+</html>
